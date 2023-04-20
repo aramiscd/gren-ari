@@ -40,7 +40,7 @@ import Html.Attributes exposing ( style )
 type AlignItems = AiStart | AiCenter | AiEnd | AiStretch
 type Display = DFlex | DInline
 type FlexDirection = FdRow | FdRowReverse | FdColumn | FdColumnReverse
-type FontSize = FsXXSmall | FsXSmall | FsSmall | FsMedium | FsLarge | FsXLarge | FsXXLarge | FsXXXLarge
+type FontSize = FsInherit | FsXXSmall | FsXSmall | FsSmall | FsMedium | FsLarge | FsXLarge | FsXXLarge | FsXXXLarge
 type FontWeight = FwNormal | FwBold
 type JustifyContent = JcStart | JcCenter | JcEnd | JcSpaceBetween | JcSpaceAround | JcSpaceEvenly | JcStretch
 type Length = LAuto | Px Int | Vh Int | Vw Int | Vmax Int | Vmin Int
@@ -132,7 +132,7 @@ css =
     , display = DFlex
     , flexDirection = FdRow
     , fontFamily = "sans-serif"
-    , fontSize = FsMedium
+    , fontSize = FsInherit
     , fontWeight = FwNormal
     , height = LAuto
     , justifyContent = JcStart
@@ -211,6 +211,7 @@ strJustifyContent v = case v of
 -}
 strFontSize : FontSize -> String
 strFontSize v = case v of
+    FsInherit -> "inherit"
     FsXXSmall -> "xx-small"
     FsXSmall -> "x-small"
     FsSmall -> "small"
