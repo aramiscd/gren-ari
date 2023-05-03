@@ -124,7 +124,7 @@ type alias Css =
 css : Css
 css =
     { alignItems = AiStart
-    , bgColor = "inherit"
+    , bgColor = "transparent"
     , borderColor = "inherit"
     , borderWidth = Px 0
     , color = "inherit"
