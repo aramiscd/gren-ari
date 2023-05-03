@@ -6,7 +6,8 @@ module Ari.Css exposing
     , FontSize (..)
     , FontWeight (..)
     , JustifyContent (..)
-    , Length(..)
+    , Length (..)
+    , Position (..)
     , TextDecorationLine (..)
     , UserSelect (..)
     , css
@@ -44,6 +45,7 @@ type FontSize = FsInherit | FsXXSmall | FsXSmall | FsSmall | FsMedium | FsLarge 
 type FontWeight = FwNormal | FwBold
 type JustifyContent = JcStart | JcCenter | JcEnd | JcSpaceBetween | JcSpaceAround | JcSpaceEvenly | JcStretch
 type Length = LAuto | Px Int | Vh Int | Vw Int | Vmax Int | Vmin Int
+type Position = PAbsolute | PRelative | PStatic | PSticky
 type TextDecorationLine = TdlNone | TdlUnderline | TdlOverline | TdlLineThrough | TdlBlink
 type UserSelect = UsNone | UsAuto | UsText | UsAll | UsContain
 
@@ -65,18 +67,17 @@ compile ss =
     , style "font-weight" ( strFontWeight ss.fontWeight )
     , style "height" ( strLength ss.height )
     , style "justify-content" ( strJustifyContent ss.justifyContent )
-    , style "margin" ( strLength ss.margin )
     , style "margin-bottom" ( strLength ss.marginBottom )
     , style "margin-left" ( strLength ss.marginLeft )
     , style "margin-right" ( strLength ss.marginRight )
     , style "margin-top" ( strLength ss.marginTop )
     , style "min-height" ( strLength ss.minHeight )
     , style "min-width" ( strLength ss.minWidth )
-    , style "padding" ( strLength ss.padding )
     , style "padding-bottom" ( strLength ss.paddingBottom )
     , style "padding-left" ( strLength ss.paddingLeft )
     , style "padding-right" ( strLength ss.paddingRight )
     , style "padding-top" ( strLength ss.paddingTop )
+    , style "position" ( strPosition ss.position )
     , style "text-decoration-line" ( strTextDecorationLine ss.textDecorationLine )
     , style "user-select" ( strUserSelect ss.userSelect )
     , style "width" ( strLength ss.width )
@@ -101,18 +102,17 @@ type alias Css =
     , fontWeight : FontWeight
     , height : Length
     , justifyContent : JustifyContent
-    , margin : Length
     , marginBottom : Length
     , marginLeft : Length
     , marginRight : Length
     , marginTop : Length
     , minHeight : Length
     , minWidth : Length
-    , padding : Length
     , paddingBottom : Length
     , paddingLeft : Length
     , paddingRight : Length
     , paddingTop : Length
+    , position : Position
     , textDecorationLine : TextDecorationLine
     , userSelect : UserSelect
     , width : Length
@@ -136,25 +136,24 @@ css =
     , fontWeight = FwNormal
     , height = LAuto
     , justifyContent = JcStart
-    , margin = Px 0
     , marginBottom = Px 0
     , marginLeft = Px 0
     , marginRight = Px 0
     , marginTop = Px 0
     , minHeight = LAuto
     , minWidth = LAuto
-    , padding = Px 0
     , paddingBottom = Px 0
     , paddingLeft = Px 0
     , paddingRight = Px 0
     , paddingTop = Px 0
+    , position = PStatic
     , textDecorationLine = TdlNone
     , userSelect = UsAuto
     , width = LAuto
     }
 
 
-{-| Übersetze `Length` in einen CSS-Wertert.
+{-| Übersetze `Length` in einen String.
 -}
 strLength : Length -> String
 strLength v = case v of
@@ -166,7 +165,7 @@ strLength v = case v of
     Vmin n -> String.fromInt n ++ "vmin"
 
 
-{-| Übersetze `AlignItems` in einen CSS-Wert.
+{-| Übersetze `AlignItems` in einen String.
 -}
 strAlignItems : AlignItems -> String
 strAlignItems v = case v of
@@ -176,7 +175,7 @@ strAlignItems v = case v of
     AiStretch -> "stretch"
 
 
-{-| Übersetze `Display` in einen CSS-Wert.
+{-| Übersetze `Display` in einen String.
 -}
 strDisplay : Display -> String
 strDisplay v = case v of
@@ -184,7 +183,7 @@ strDisplay v = case v of
     DInline -> "Inline"
 
 
-{-| Übersetze `FlexDirection` in einen CSS-Wert.
+{-| Übersetze `FlexDirection` in einen String.
 -}
 strFlexDirection : FlexDirection -> String
 strFlexDirection v = case v of
@@ -194,7 +193,7 @@ strFlexDirection v = case v of
     FdColumnReverse -> "column-reverse"
 
 
-{-| Übersetze `JustifyContent` in einen CSS-Wert.
+{-| Übersetze `JustifyContent` in einen String.
 -}
 strJustifyContent : JustifyContent -> String
 strJustifyContent v = case v of
@@ -207,7 +206,7 @@ strJustifyContent v = case v of
     JcStretch -> "stretch"
 
 
-{-| Überetze `FontSize` in einen CSS-Wert.
+{-| Überetze `FontSize` in einen String.
 -}
 strFontSize : FontSize -> String
 strFontSize v = case v of
@@ -222,7 +221,7 @@ strFontSize v = case v of
     FsXXXLarge -> "xx-large"
 
 
-{-| Übersetze `UserSelect` in einen CSS-Wert.
+{-| Übersetze `UserSelect` in einen String.
 -}
 strUserSelect : UserSelect -> String
 strUserSelect v = case v of
@@ -233,7 +232,7 @@ strUserSelect v = case v of
     UsContain -> "contain"
 
 
-{-| Überetze `TextDecorationLine` in einen CSS-Wert.
+{-| Überetze `TextDecorationLine` in einen String.
 -}
 strTextDecorationLine : TextDecorationLine -> String
 strTextDecorationLine v = case v of
@@ -244,9 +243,19 @@ strTextDecorationLine v = case v of
     TdlBlink -> "blink"
 
 
-{-| Übersetze `FontWeight` in einen CSS-Wert.
+{-| Übersetze `FontWeight` in einen String.
 -}
 strFontWeight : FontWeight -> String
 strFontWeight v = case v of
     FwNormal -> "normal"
     FwBold -> "bold"
+
+
+{-| Übersetze `Position` in einen CSS-Wert.
+-}
+strPosition : Position -> String
+strPosition v = case v of
+    PAbsolute -> "absolute"
+    PRelative -> "relative"
+    PStatic -> "static"
+    PSticky -> "sticky"
