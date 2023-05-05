@@ -1,6 +1,10 @@
 module Ari.Events exposing
     ( Events
     , onClick
+    , onMouseDown
+    , onMouseUp
+    , onTouchStart
+    , onTouchEnd
     , compile
     )
 
@@ -11,6 +15,7 @@ Siehe `Ari.Css` für eine Erläuterung.
 
 import Html
 import Html.Events
+import Html.Events.Extra.Touch
 
 
 type alias Events msg = List ( Event msg )
@@ -21,6 +26,30 @@ type Event msg = Event ( Html.Attribute msg )
 -}
 onClick : msg -> Event msg
 onClick msg = Event ( Html.Events.onClick msg )
+
+
+{-| Maustaste wird gedrückt.
+-}
+onMouseDown : msg -> Event msg
+onMouseDown msg = Event ( Html.Events.onMouseDown msg )
+
+
+{-| Maustaste wird losgelassen.
+-}
+onMouseUp : msg -> Event msg
+onMouseUp msg = Event ( Html.Events.onMouseUp msg )
+
+
+{-| Finger berührt den Bildschirm.
+-}
+onTouchStart : msg -> Event msg
+onTouchStart msg = Event ( Html.Events.Extra.Touch.onStart ( \ _ -> msg ) )
+
+
+{-| Finger verlässt den Bildschirm.
+-}
+onTouchEnd : msg -> Event msg
+onTouchEnd msg = Event ( Html.Events.Extra.Touch.onEnd ( \ _ -> msg ) )
 
 
 {-| Übersetze ein Ereignis in ein Html-Attribut.

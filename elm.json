@@ -6,6 +6,7 @@
 , "source-directories" :
     [ "src"
     ]
+, "version" : "0.1.0"
 , "exposed-modules" :
     [ "Ari.Css"
     , "Ari.Events"
@@ -14,6 +15,7 @@
 , "dependencies" :
     { "elm/core" : "1.0.5 <= v < 1.1.0"
     , "elm/html" : "1.0.0 <= v < 1.1.0"
+    , "mpizenberg/elm-pointer-events" : "5.0.0 <= v < 6.0.0"
     }
 , "test-dependencies" : {}
 }
