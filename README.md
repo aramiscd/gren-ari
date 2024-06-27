@@ -1,3 +1,3 @@
 # ari
 
-Ein Gren HTML+CSS-Toolkit.  **Work in progress!**
+Ein HTML+CSS-Toolkit für [Gren](https://gren-lang.com/).  **Work in progress!**
