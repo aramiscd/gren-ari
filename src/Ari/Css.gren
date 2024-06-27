@@ -52,7 +52,7 @@ type UserSelect = UsNone | UsAuto | UsText | UsAll | UsContain
 
 {-| Übersetze einen CSS-Record in eine Attributliste.
 -}
-compile : Css -> List ( Html.Attribute msg )
+compile : Css -> Array ( Html.Attribute msg )
 compile ss =
     [ style "align-items" ( strAlignItems ss.alignItems )
     , style "background-color" ss.bgColor

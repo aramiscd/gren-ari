@@ -14,7 +14,7 @@ import Ari.Events as Events exposing ( Events )
 import Html exposing ( Html )
 
 
-div : Css -> Events msg -> List ( Html msg ) -> Html msg
+div : Css -> Events msg -> Array ( Html msg ) -> Html msg
 div css events content = Html.div ( attrs css events ) content
 
 
@@ -26,5 +26,5 @@ nothing : Html msg
 nothing = Html.text ""
 
 
-attrs : Css -> Events msg -> List ( Html.Attribute msg )
+attrs : Css -> Events msg -> Array ( Html.Attribute msg )
 attrs css events = Css.compile css ++ Events.compile events

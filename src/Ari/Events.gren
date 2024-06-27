@@ -3,8 +3,8 @@ module Ari.Events exposing
     , onClick
     , onMouseDown
     , onMouseUp
-    , onTouchStart
-    , onTouchEnd
+--  , onTouchStart
+--  , onTouchEnd
     , compile
     )
 
@@ -15,10 +15,10 @@ Siehe `Ari.Css` für eine Erläuterung.
 
 import Html
 import Html.Events
-import Html.Events.Extra.Touch
+-- import Html.Events.Extra.Touch
 
 
-type alias Events msg = List ( Event msg )
+type alias Events msg = Array ( Event msg )
 type Event msg = Event ( Html.Attribute msg )
 
 
@@ -40,16 +40,18 @@ onMouseUp : msg -> Event msg
 onMouseUp msg = Event ( Html.Events.onMouseUp msg )
 
 
-{-| Finger berührt den Bildschirm.
--}
-onTouchStart : msg -> Event msg
-onTouchStart msg = Event ( Html.Events.Extra.Touch.onStart ( \ _ -> msg ) )
+-- todo: für gren anpassen oder weg damit
+-- {-| Finger berührt den Bildschirm.
+-- -}
+-- onTouchStart : msg -> Event msg
+-- onTouchStart msg = Event ( Html.Events.Extra.Touch.onStart ( \ _ -> msg ) )
 
 
-{-| Finger verlässt den Bildschirm.
--}
-onTouchEnd : msg -> Event msg
-onTouchEnd msg = Event ( Html.Events.Extra.Touch.onEnd ( \ _ -> msg ) )
+-- todo: für gren anpassen oder weg damit
+-- {-| Finger verlässt den Bildschirm.
+-- -}
+-- onTouchEnd : msg -> Event msg
+-- onTouchEnd msg = Event ( Html.Events.Extra.Touch.onEnd ( \ _ -> msg ) )
 
 
 {-| Übersetze ein Ereignis in ein Html-Attribut.
@@ -60,5 +62,5 @@ unpack ( Event attr ) = attr
 
 {-| Übersetze eine Liste von Ereignissen in eine Liste von Html-Attributen.
 -}
-compile : List ( Event msg ) -> List ( Html.Attribute msg )
-compile events = List.map unpack events
+compile : Array ( Event msg ) -> Array ( Html.Attribute msg )
+compile events = Array.map unpack events

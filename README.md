@@ -1,3 +1,3 @@
-# elm-ari
+# ari
 
-Mein Elm-Toolkit.  **Work in progress!**
+Ein Elm-Toolkit.  **Work in progress!**
