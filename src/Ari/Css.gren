@@ -14,25 +14,34 @@ module Ari.Css exposing
     , compile
     ) 
 
-{-| Record-basiertes CSS.
-
-Ich bin unzufrieden damit, wie CSS normalerweise in Elm gehandhabt wird. Prinzipiell kann ich das Design gut
-nachvollziehen.  Bspw. muss `style : String -> String -> Attribute msg` nicht aktualisiert werden wenn neue
-CSS-Attribute hinzukommen.  In der Praxis wird CSS in Elm aber sehr schnell unhandlich und unübersichtlich,
-so dass die manuelle Konstruktion von grafischen Benutzerschnittstellen mit elm/html nicht gut skaliert.
-
-Ich probiere hier einen alternativen Ansatz aus: CSS wird als ein großer Elm-Record spezifiziert.  Dadurch kann man
-Elms Record-Update-Syntax verwenden um CSS-Attribute zu setzen.  Für die Felder lege ich eigene Datentypen fest,
-damit der Compiler noch mehr mithelfen kann, CSS zu schreiben.  Weiterhin möchte ich hier nur die Teilmenge von
-CSS abbilden, die ich tatsächlich verwende, denn CSS ist mittlerweile so umfangreich, dass ich mich nach einer
-klar definierten, kompakten Teilmenge sehne, die immer noch ausreicht, um moderne GUIs zu konstruieren.
-
-Ein Nachteil bei diesem Ansatz ist, dass der gesamte(!) CSS-Record am Ende als inline Style-Attribut in
-jedem(!) Html-Element untergebracht wird.  Das lässt sich prinzipiell optimieren, aber unoptimiert bläht es
-das Html-Markup erheblich auf.  Außerdem weiß ich aktuell nicht, wie gut Elm mit großen Records zurechtkommt.
-Es ist denkbar, dass hier Engpässe lauern, zumal Elm auch an anderen Stellen die Erwartungshaltung mitbringt,
-dass Quantitäten auf der Typ-Ebene einstellig bleiben.
--}
+-- Record-basiertes CSS.
+--
+-- Ich bin unzufrieden damit, wie CSS normalerweise in Elm gehandhabt
+-- wird. Prinzipiell kann ich das Design gut nachvollziehen.
+-- Bspw. muss `style : String -> String -> Attribute msg` nicht
+-- aktualisiert werden wenn neue CSS-Attribute hinzukommen.
+-- In der Praxis wird CSS in Elm aber sehr schnell unhandlich und
+-- unübersichtlich, so dass die manuelle Konstruktion von grafischen
+-- Benutzerschnittstellen mit elm/html nicht gut skaliert.
+--
+-- Ich probiere hier einen alternativen Ansatz aus: CSS wird als
+-- ein großer Elm-Record spezifiziert.  Dadurch kann man Elms
+-- Record-Update-Syntax verwenden um CSS-Attribute zu setzen.  Für
+-- die Felder lege ich eigene Datentypen fest, damit der Compiler
+-- noch mehr mithelfen kann, CSS zu schreiben.  Weiterhin möchte ich
+-- hier nur die Teilmenge von CSS abbilden, die ich tatsächlich
+-- verwende, denn CSS ist mittlerweile so umfangreich, dass ich mich
+-- nach einer klar definierten, kompakten Teilmenge sehne, die immer
+-- noch ausreicht, um moderne GUIs zu konstruieren.
+--
+-- Ein Nachteil bei diesem Ansatz ist, dass der gesamte(!) CSS-Record
+-- am Ende als inline Style-Attribut in jedem(!) Html-Element
+-- untergebracht wird.  Das lässt sich prinzipiell optimieren,
+-- aber unoptimiert bläht es das Html-Markup erheblich auf.
+-- Außerdem weiß ich aktuell nicht, wie gut Elm mit großen Records
+-- zurechtkommt.  Es ist denkbar, dass hier Engpässe lauern, zumal
+-- Elm auch an anderen Stellen die Erwartungshaltung mitbringt,
+-- dass Quantitäten auf der Typ-Ebene einstellig bleiben.
 
 import Html
 import Html.Attributes exposing ( style )
@@ -50,8 +59,7 @@ type TextDecorationLine = TdlNone | TdlUnderline | TdlOverline | TdlLineThrough 
 type UserSelect = UsNone | UsAuto | UsText | UsAll | UsContain
 
 
-{-| Übersetze einen CSS-Record in eine Attributliste.
--}
+-- Übersetze einen CSS-Record in eine Attributliste.
 compile : Css -> Array ( Html.Attribute msg )
 compile ss =
     [ style "align-items" ( strAlignItems ss.alignItems )
@@ -86,8 +94,7 @@ compile ss =
     ]
 
 
-{-| CSS-Record-Datentyp.
--}
+-- CSS-Record-Datentyp.
 type alias Css =
     { alignItems : AlignItems
     , bgColor : String
@@ -119,8 +126,7 @@ type alias Css =
     }
 
 
-{-| CSS-Record.
--}
+-- CSS-Record.
 css : Css
 css =
     { alignItems = AiStart
@@ -153,8 +159,7 @@ css =
     }
 
 
-{-| Übersetze `Length` in einen String.
--}
+-- Übersetze `Length` in einen String.
 strLength : Length -> String
 strLength v = case v of
     LAuto -> "auto"
@@ -165,8 +170,7 @@ strLength v = case v of
     Vmin n -> String.fromInt n ++ "vmin"
 
 
-{-| Übersetze `AlignItems` in einen String.
--}
+-- Übersetze `AlignItems` in einen String.
 strAlignItems : AlignItems -> String
 strAlignItems v = case v of
     AiStart -> "start"
@@ -175,16 +179,14 @@ strAlignItems v = case v of
     AiStretch -> "stretch"
 
 
-{-| Übersetze `Display` in einen String.
--}
+-- Übersetze `Display` in einen String.
 strDisplay : Display -> String
 strDisplay v = case v of
     DFlex -> "flex"
     DInline -> "Inline"
 
 
-{-| Übersetze `FlexDirection` in einen String.
--}
+-- Übersetze `FlexDirection` in einen String.
 strFlexDirection : FlexDirection -> String
 strFlexDirection v = case v of
     FdRow -> "row"
@@ -193,8 +195,7 @@ strFlexDirection v = case v of
     FdColumnReverse -> "column-reverse"
 
 
-{-| Übersetze `JustifyContent` in einen String.
--}
+-- Übersetze `JustifyContent` in einen String.
 strJustifyContent : JustifyContent -> String
 strJustifyContent v = case v of
     JcStart -> "start"
@@ -206,8 +207,7 @@ strJustifyContent v = case v of
     JcStretch -> "stretch"
 
 
-{-| Überetze `FontSize` in einen String.
--}
+-- Überetze `FontSize` in einen String.
 strFontSize : FontSize -> String
 strFontSize v = case v of
     FsInherit -> "inherit"
@@ -221,8 +221,7 @@ strFontSize v = case v of
     FsXXXLarge -> "xx-large"
 
 
-{-| Übersetze `UserSelect` in einen String.
--}
+-- Übersetze `UserSelect` in einen String.
 strUserSelect : UserSelect -> String
 strUserSelect v = case v of
     UsNone -> "none"
@@ -232,8 +231,7 @@ strUserSelect v = case v of
     UsContain -> "contain"
 
 
-{-| Überetze `TextDecorationLine` in einen String.
--}
+-- Überetze `TextDecorationLine` in einen String.
 strTextDecorationLine : TextDecorationLine -> String
 strTextDecorationLine v = case v of
     TdlNone -> "none"
@@ -243,16 +241,14 @@ strTextDecorationLine v = case v of
     TdlBlink -> "blink"
 
 
-{-| Übersetze `FontWeight` in einen String.
--}
+-- Übersetze `FontWeight` in einen String.
 strFontWeight : FontWeight -> String
 strFontWeight v = case v of
     FwNormal -> "normal"
     FwBold -> "bold"
 
 
-{-| Übersetze `Position` in einen CSS-Wert.
--}
+-- Übersetze `Position` in einen CSS-Wert.
 strPosition : Position -> String
 strPosition v = case v of
     PAbsolute -> "absolute"

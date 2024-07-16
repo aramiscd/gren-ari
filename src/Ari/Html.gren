@@ -4,10 +4,8 @@ module Ari.Html exposing
     , nothing
     )
 
-{-| Html-Elemente basierend auf meinem `Css`-Datentyp und meinem `Events`-Datentyp.
-
-Siehe `Ari.Css` für eine Erläuterung.
--}
+-- Html-Elemente basierend auf meinem `Css`-Datentyp und meinem `Events`-Datentyp.
+--Siehe `Ari.Css` für eine Erläuterung.
 
 import Ari.Css as Css exposing ( Css )
 import Ari.Events as Events exposing ( Events )

@@ -1,13 +1,13 @@
 { "type" : "package"
 , "platform" : "browser"
-, "name" : "author/project"
-, "summary" : "helpful summary of your project, less than 80 characters"
+, "name" : "aramiscd/gren-ari"
+, "summary" : "html+css toolkit for the gren language"
 , "license" : "BSD-3-Clause"
 , "version" : "1.0.0"
 , "exposed-modules" : []
 , "gren-version" : "0.4.4 <= v < 0.5.0"
 , "dependencies" :
     { "gren-lang/browser" : "4.0.0 <= v < 5.0.0"
-    , "gren-lang/core" : "5.0.0 <= v < 6.0.0"
+    , "gren-lang/core" : "5.0.2 <= v < 6.0.0"
     }
 }
