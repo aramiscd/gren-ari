@@ -1,9 +1,12 @@
 #!/usr/bin/env fish
 
-git push origin
-git push git@git.sr.ht:~aramis/gren-ari
-git push git@github.com:aramiscd/gren-ari.git
+set repo gren-ari
 
+git push origin $argv
 git push origin --tags
-git push git@git.sr.ht:~aramis/gren-ari --tags
-git push git@github.com:aramiscd/gren-ari.git --tags
+
+git push git@git.sr.ht:~aramis/$repo $argv
+git push git@git.sr.ht:~aramis/$repo --tags
+
+git push git@github.com:aramiscd/$repo $argv
+git push git@github.com:aramiscd/$repo --tags
