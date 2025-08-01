@@ -3,15 +3,15 @@
 , "name" : "aramiscd/gren-ari"
 , "summary" : "html+css toolkit for the gren language"
 , "license" : "BSD-3-Clause"
-, "version" : "1.1.0"
+, "version" : "1.2.0"
 , "exposed-modules" :
     [ "Ari.Css"
     , "Ari.Events"
     , "Ari.Html"
     ]
-, "gren-version" : "0.4.4 <= v < 0.5.0"
+, "gren-version" : "0.5.3 <= v < 0.6.0"
 , "dependencies" :
-    { "gren-lang/browser" : "4.0.0 <= v < 5.0.0"
-    , "gren-lang/core" : "5.0.2 <= v < 6.0.0"
+    { "gren-lang/browser" : "5.0.1 <= v < 6.0.0"
+    , "gren-lang/core" : "6.0.1 <= v < 7.0.0"
     }
 }
